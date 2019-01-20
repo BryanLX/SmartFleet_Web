@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Hello, world!</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <script src={{ url_for('static', filename = 'main.js') }}> </script>
+  <!-- Material Kit CSS -->
+
+  <link href="{{ url_for('static', filename = 'assets/css/material-dashboard.css') }}" rel="stylesheet" />
+  <!-- ################################## Mike's Styling ################### -->
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 150px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #a9afbb;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 24px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #00bcd4;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(120px);
+  -ms-transform: translateX(120px);
+  transform: translateX(120px);
+}
+
+/*------ ADDED CSS ---------*/
+.on
+{
+  display: none;
+}
+
+.on, .off
+{
+  color: white;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  font-size: 10px;
+  font-family: Verdana, sans-serif;
+}
+
+input:checked+ .slider .on
+{display: block;}
+
+input:checked + .slider .off
+{display: none;}
+
+/*--------- END --------*/
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;}
+/*-------- TABLE FOR PERSONAL HISTORY --------*/
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<!-- ################################ END Mike's Styling ################### -->
+</head>
+
+<body onload="frequentCheck()">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="azure" data-background-color="white">
+      <!--
+      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+      Tip 2: you can also add an image using data-image tag
+  -->
+        <div class="logo">
+                    <img style="height:100px;width:120px;margin-left:65px"src="{{ url_for('static', filename = 'logo1.png') }}" >
+        </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active  " id ="nav1"onclick="changepage('0')">
+            <a class="nav-link" >
+              <i class="material-icons">dashboard</i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item inactive  "  id ="nav3" onclick="changepage('2')">
+            <a class="nav-link" href="#0">
+              <i class="material-icons">history</i>
+              <p>History</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="#pablo" style="float:left;font-size:25px;">Hello , Bryan</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content" id="dashboard">
+            <div class="container-fluid">
+              <!-- your content here -->
+              <div class="card " style="background:azure;">
+                <div class="card-header">
+                  Featured
+                </div>
+
+                <div class="card-body" style="font-size:15px; color:unset;">
+                  <h5 class="card-title">Deliver Banana to Markham</h5>
+                  <br>
+                  <h6 class="card-subtitle mb-2 "><b>Assigned worker:</b> Ming Xu </h6>
+                  <h6 class="card-subtitle mb-2 "><b>Assigned vehicle:</b> Tesla S </h6>
+                  <h6 class="card-subtitle mb-2 "><b>Status:</b> Not Started</h6>
+                  <h6 class="card-subtitle mb-2 "><b>Start time:</b> <time>14:00</time> </h6>
+                  <h6 class="card-subtitle mb-2 "><b>Estimate finish time:</b> <time>15:00</time> </h6>
+                  <p class="card-text">A story generator or plot generator is a tool that generates basic narratives or plot ideas. The generator could be in the form of a computer program, a chart with multiple columns, a book composed of ... Wikipedia</p>
+                  <h6 class="card-subtitle mb-3 "><b>Current location:</b> <h6 id ="trueLocation"><h6> </h6>
+                  <h6 class="card-subtitle mb-3 "><b>Current mileage:</b> <h6 id ="truemileage">12323km<h6> </h6>
+                  <button type="button" class="btn btn-primary azure" onclick="lockCar()">Lock</button>
+                  <button type="button" class="btn btn-secondary" onclick="unlockCar()" >Unlock</button>
+                </div>
+
+                </div>
+
+                <div class="card " style="background:azure;">
+                  <div class="card-header">
+                    Featured
+                  </div>
+
+                  <div class="card-body" style="font-size:15px;color: unset;">
+                    <h5 class="card-title">Deliver Banana to Markham</h5>
+                    <br>
+                    <h6 class="card-subtitle mb-2 "><b>Assigned worker:</b> Ming Xu </h6>
+                    <h6 class="card-subtitle mb-2 "><b>Assigned vehicle:</b> Hyundai yoyoyo </h6>
+                    <h6 class="card-subtitle mb-2 "><b>Status:</b> Not Started</h6>
+                    <h6 class="card-subtitle mb-2 "><b>Start time:</b> <time>14:00</time> </h6>
+                    <h6 class="card-subtitle mb-2 "><b>Estimate finish time:</b> <time>15:00</time> </h6>
+                    <p class="card-text">Deliver 100 Apple to Markham in 10 mins, be care for with apple</p>
+                    <h5><b> LOCK/UNLOCK CAR </b></h5><label class="switch"><input type="checkbox" id="togBtn2"><div class="slider round"><!--ADDED HTML --><span class="on">Unlocked</span><span class="off">Locked</span><!--END--></div></label> </label>
+                  </div>
+
+                  </div>
+
+                <div class="card-footer text-muted">
+                  That is all for today
+                </div>
+              </div>
+
+      </div>
+
+          <!-- <div class="card text-white bg-info mb-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Deliver Apple to Markham</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Assigned worker: Steve </h6>
+              <p class="card-text">Deliver 100 Apple to Markham in 10 mins, be care for with apple</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div> -->
+
+        <!-- ######################################################### -->
+        <!-- ######################################################### -->
+        <div class="content" id="workers">
+            <div class="container-fluid" style="display:flex;flex-wrap: wrap;">
+
+            <h2>Your history</h2>
+
+            <table>
+              <tr>
+                <th> Car </th>
+                <th> Location </th>
+                <th> Date </th>
+                <th> Time of Completion </th>
+                <th> Mileage </th>
+              </tr>
+              <tr>
+                <td> Audi R8 </td>
+                <td> 222 Elm Street </td>
+                <td> 12/12/18 </td>
+                <td> 2 hours 10 minutes </td>
+                <td> 46.4 miles </td>
+              </tr>
+              <tr>
+                <td> Tesla Model S </td>
+                <td> 205 College Street </td>
+                <td> 11/28/18 </td>
+                <td> 4 hours 24 minutes </td>
+                <td> 98 miles </td>
+              </tr>
+              <tr>
+                <td> BMW M6 </td>
+                <td> 95 Spring Richards Avenue </td>
+                <td> 11/25/18 </td>
+                <td> 1 hour 54 minutes </td>
+                <td> 33.2 miles </td>
+              </tr>
+            </table>
+            </div>
+        </div>
+  <!-- ######################################################### -->
+  <!-- ######################################################### -->
+
+
+
+
+
+
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav class="float-left">
+            <ul>
+              <li>
+                <a>
+                  SmartDrive
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <!-- your footer here -->
+          <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script>, made by <i class="material-icons">favorite</i> by
+            <a href="https://www.creative-tim.com" target="_blank">SmartDrive</a>  team
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</body>
+
+</html>

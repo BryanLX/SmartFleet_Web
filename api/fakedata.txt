@@ -1,0 +1,11 @@
+newVehicles.append({'id': 0, 'make': 'Buick', 'model': 'Cascada', 'year': 2018})
+newVehicles.append({'id': 1, 'make': 'Chevrolet', 'model': 'Bolt', 'year': 2019})
+newVehicles.append({'id': 2, 'make': 'Audi', 'model': 'A4 Sedan', 'year': 2018})
+
+allTasks.append(Task('First Title', 111, 0, '10am', '12pm', 'destinationHERE', 'in progress'))
+allTasks.append(Task('Second Task', 112, 2, '1pm', '3pm', 'destinationHERE', 'not started'))
+
+-- REAL DATA
+{"id":"5949c9e8-0402-411f-90d4-280b6d3e08d5","make":"TESLA","model":"Model S","year":2016}
+{"id":"6de7334e-789b-4f38-bc65-6570b1ea3adc","make":"TESLA","model":"Model 3","year":2018}
+{"id":"b882135e-5f08-4a75-82d3-685b8bba6460","make":"TESLA","model":"Model X","year":2017}

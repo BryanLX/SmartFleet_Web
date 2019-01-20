@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Smart Car</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <script src={{ url_for('static', filename = 'main.js') }}> </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChhIkfCNJqOM7QYsBeQmOeG3LKE74RQa4&callback=initMap"></script>
+
+
+  <style>
+   /* Set the size of the div element that contains the map */
+  #map {
+    height: 400px;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+   }
+</style>
+  <!-- Material Kit CSS -->
+
+  <link href="{{ url_for('static', filename = 'assets/css/material-dashboard.css') }}" rel="stylesheet" />
+</head>
+
+<body onload="setUp()">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="azure" data-background-color="white">
+      <!--
+      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+      Tip 2: you can also add an image using data-image tag
+  -->
+      <div class="logo">
+                  <img style="height:100px;width:120px;margin-left:65px"src="{{ url_for('static', filename = 'logo1.png') }}" >
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active  " id ="nav1"onclick="changepage('0')">
+            <a class="nav-link" >
+              <i class="material-icons">dashboard</i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <!-- your sidebar here -->
+          <li class="nav-item inactive  " id ="nav2" onclick="changepage('1')">
+            <a class="nav-link" href="#0">
+              <i class="material-icons">directions_car</i>
+              <p>vehicle</p>
+            </a>
+          </li>
+          <li class="nav-item inactive  "  id ="nav3" onclick="changepage('2')">
+            <a class="nav-link" href="#0">
+              <i class="material-icons">people</i>
+              <p>workers</p>
+            </a>
+          </li>
+          <li class="nav-item inactive  " id ="nav4" onclick="changepage('3')">
+            <a class="nav-link" href="#0">
+              <i class="material-icons">assignment</i>
+              <p>taskAssignment</p>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" id = "panelName"href="#pablo">All tasks</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#pablo">
+                  <i class="material-icons">assignment_ind</i> Toronto fleet
+                </a>
+              </li>
+              <!-- your navbar here -->
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content" id="dashboard">
+        <div class="" style="display:flex;flex-wrap: wrap;" id="tasksList">
+          <!-- your content here -->
+          <div class="card border-dark mb-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Deliver Apple to Markham</h5>
+              <br>
+              <h6 class="card-subtitle mb-2 "><b>Assigned worker:</b> Steve </h6>
+              <h6 class="card-subtitle mb-2 "><b>Assigned vehicle:</b> BMW 323i </h6>
+              <h6 class="card-subtitle mb-2 "><b>Status:</b> Not Started</h6>
+              <h6 class="card-subtitle mb-2 "><b>Start time:</b> <time>10:00</time> </h6>
+              <h6 class="card-subtitle mb-2 "><b>Estimate finish time:</b> <time>12:00</time> </h6>
+              <p class="card-text">Deliver 100 Apple to Markham in 10 mins, be care for with apple</p>
+
+            </div>
+          </div>
+          <div class="card border-dark mb-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Deliver Pineapple to Markham</h5>
+              <br>
+              <h6 class="card-subtitle mb-2 "><b>Assigned worker:</b> Bryan </h6>
+              <h6 class="card-subtitle mb-2 "><b>Assigned vehicle:</b> Benz slk250 </h6>
+              <h6 class="card-subtitle mb-2 "><b>Status:</b> Not Started</h6>
+              <h6 class="card-subtitle mb-2 "><b>Start time:</b> <time>12:00</time> </h6>
+              <h6 class="card-subtitle mb-2 "><b>Estimate finish time:</b> <time>14:00</time> </h6>
+              <p class="card-text">Deliver 100 pineapple to Markham in 10 mins, be careful with apple</p>
+
+            </div>
+          </div>
+
+          <div class="card border-dark mb-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Deliver Banana to Markham</h5>
+              <br>
+              <h6 class="card-subtitle mb-2 "><b>Assigned worker:</b> Ming Xu </h6>
+              <h6 class="card-subtitle mb-2 "><b>Assigned vehicle:</b> Hyundai yoyoyo </h6>
+              <h6 class="card-subtitle mb-2 "><b>Status:</b> Not Started</h6>
+              <h6 class="card-subtitle mb-2 "><b>Start time:</b> <time>14:00</time> </h6>
+              <h6 class="card-subtitle mb-2 "><b>Estimate finish time:</b> <time>15:00</time> </h6>
+              <p class="card-text">Deliver 100 Apple to Markham in 10 mins, be care for with apple</p>
+
+            </div>
+          </div>
+
+          <div class="card border-dark mb-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Deliver grape to Markham</h5>
+              <br>
+              <h6 class="card-subtitle mb-2 "><b>Assigned worker:</b> Jack </h6>
+              <h6 class="card-subtitle mb-2 "><b>Assigned vehicle:</b> BMW 323i </h6>
+              <h6 class="card-subtitle mb-2 "><b>Status:</b> Not Started</h6>
+              <h6 class="card-subtitle mb-2 "><b>Start time:</b> <time>15:00</time> </h6>
+              <h6 class="card-subtitle mb-2 "><b>Estimate finish time:</b> <time>17:00</time> </h6>
+              <p class="card-text">Deliver 100 Apple to Markham in 10 mins, be care for with apple</p>
+
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="content" style="display:flex;flex-wrap: wrap;"id="vehicle">
+      <div class="" style="display:flex;flex-wrap: wrap;">
+        <div class="card border-dark mb-3" style="width: 18rem;">
+          <div class="card-body">
+              <h5 class="card-title">BMW M6</h5>
+              <br>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Make:</b> BMW </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Model:</b> M6 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Year:</b> 2015 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>VIN:</b> WBS6C9C50F0010137 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>ID:</b> 001 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last user:</b> Bryan </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Miles:</b> 4,999 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last Location:</b> Sidney Smith </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last Maintenance:</b> 08/13/18 </h6>
+          </div>
+        </div>
+        <div class="card border-dark mb-3" style="width: 18rem;">
+          <div class="card-body">
+              <h5 class="card-title">Tesla Model S</h5>
+              <br>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Make:</b> Tesla </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Model:</b> Model S </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Year:</b> 2015 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>VIN:</b> 5YJSA1H14FF085430 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>ID:</b> 002 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last user:</b> None </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Miles:</b> 12,254 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last Location:</b> Bahen Centre for Information and Technology </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last Maintenance:</b> 07/24/18 </h6>
+          </div>
+        </div>
+        <div class="card border-dark mb-3" style="width: 18rem;">
+          <div class="card-body">
+              <h5 class="card-title">Audi R8</h5>
+              <br>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Make:</b> Audi </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Model:</b> R8 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Year:</b> 2015 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>VIN:</b> WUAFUAFG0F0012864 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>ID:</b> 003 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last user:</b> Michael </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Miles:</b> 8,963 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last Location:</b> Toronto Pearson International Airport </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last Maintenance:</b> 08/29/18 </h6>
+          </div>
+        </div>
+        <div class="card border-dark mb-3" style="width: 18rem;">
+          <div class="card-body">
+              <h5 class="card-title">Cadillac ATS</h5>
+              <br>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Make:</b> Cadillac </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Model:</b> ATS </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Year:</b> 2016 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>VIN:</b> 1G6AA5RA9G0109886 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>ID:</b> 004 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last user:</b> Wes </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Miles:</b> 32,013 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last Location:</b> Bahen Centre for Information and Technology </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last Maintenance:</b> 10/10/18 </h6>
+          </div>
+        </div>
+        <div>
+        <div class="card border-dark mb-3" style="width: 18rem;">
+          <div class="card-body">
+              <h5 class="card-title">Tesla Model S</h5>
+              <br>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Make:</b> Tesla </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Model:</b> Model S </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Year:</b> 2016 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>VIN:</b> 5YJSA1E25GF132382 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>ID:</b> 005 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last user:</b> Ming </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Miles:</b> 19,132 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last Location:</b> Toronto Mental Institute </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Last Maintenance:</b> 01/20/19 </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+    <div class="content" id="workers">
+        <div class="" style="display:flex;flex-wrap: wrap;">
+      <div class="card border-dark mb-3" style="width: 18rem;">
+          <img class="card-img-top" style="height:250px" src="https://www.thejapanguy.com/wp-content/uploads/2017/04/Asian-Faces-Quiz-Women-Queston-2-Eiko-Koike-JAPANESE.jpg" alt="Card image cap">
+          <div class="card-body">
+              <h5 class="card-title">Ming
+              </h5>
+              <br>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Name:</b> Ming </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Age:</b> 29 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Gender:</b> F </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>ID:</b> F01 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Current Task:</b> None </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Birthday:</b> 11/11/90 </h6>
+          </div>
+      </div>
+      <div class="card border-dark mb-3" style="width: 18rem;">
+        <img class="card-img-top" style="height:250px"  src="https://www.thejapanguy.com/wp-content/uploads/2017/04/Asian-Faces-Quiz-Fan-Bingbing-CHINESE.png">
+          <div class="card-body">
+              <h5 class="card-title">Alice</h5>
+              <br>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Name:</b> Alice </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Age:</b> 25 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Gender:</b> F </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>ID:</b> F02 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Current Task:</b> None </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Birthday:</b> 11/11/93 </h6>
+          </div>
+      </div>
+      <div class="card border-dark mb-3" style="width: 18rem;">
+                      <img class="card-img-top" style="height:250px"  src="https://cdn.theatlantic.com/assets/media/img/nj/2016/1/26/asian-americans-feel-held/jason-shen-headshot.jpg">
+          <div class="card-body">
+              <h5 class="card-title">Bryan</h5>
+              <br>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Name:</b> Bryan </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Age:</b> 23 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Gender:</b> M </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>ID:</b> M01 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Current Task:</b> Drive to meet client </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Birthday:</b> 09/11/95 </h6>
+
+          </div>
+      </div>
+        <div class="card border-dark mb-3" style="width: 18rem;">
+                        <img class="card-img-top" style="height:250px"  src="https://i.pinimg.com/originals/bd/a9/1d/bda91d672f190c4c61ee359188590431.jpg">
+          <div class="card-body">
+              <h5 class="card-title">Michael</h5>
+              <br>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Name:</b> Michael </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Age:</b> 31 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Gender:</b> M </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>ID:</b> M02 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Current Task:</b> None </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Birthday:</b> 03/28/88 </h6>
+
+          </div>
+        </div>
+      <div class="card border-dark mb-3" style="width: 18rem;">
+                    <img class="card-img-top"  style="height:250px"  src="https://i.pinimg.com/736x/db/28/b8/db28b8b825931035869f103d99c98ee6--black-men-beards-handsome-black-men.jpg">
+          <div class="card-body">
+              <h5 class="card-title">Michael</h5>
+              <br>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Name:</b> Wes </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Age:</b> 30 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Gender:</b> M </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>ID:</b> M03 </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Current Task:</b> None </h6>
+              <h6 class="card-subtitle mb-2 text-muted"><b>Birthday:</b> 06/05/89 </h6>
+          </div>
+      </div>
+    </div>
+      <!-- worker ends here -->
+    </div>
+
+
+
+    <div class="content" id="taskassignment" style ="background:white;border: 2px solid white;border-radius: 10px;margin-left:12px;">
+      <form id ="target">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Title</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="type the title here">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Select Worker</label>
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option>Steve</option>
+            <option>Bryan</option>
+            <option>Ming Xu</option>
+            <option>Jack</option>
+            <option>GuanYao</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect2">Select Vehicle</label>
+          <select multiple class="form-control" id="exampleFormControlSelect2">
+            <option>BMW 323I</option>
+            <option>BENZ SLK250</option>
+            <option>HYUNDAI YOYOYO</option>
+            <option>BMW 323I 2</option>
+            <option>Tesla</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Vehicle Location</label>
+          <label class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Pick Up Time</label>
+          <input type="datetime-local" name="bdaytime">
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Destnitation </label>
+          <div id="map"></div>
+          <h5>location:           <h6 id="location">-</h6>  <h5>
+        </div>
+
+        <button type="submit" onclick="addTask()" class="btn btn-primary azure">Submit</button>
+      </form>
+    </div>
+
+
+
+    </div>
+  </div>
+</body>
+
+</html>
