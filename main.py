@@ -82,8 +82,7 @@ def vehicle():
     }
     '''
 
-    return jsonify(info)
-    return 'yo what is up',200
+    return jsonify(info), 200
 
 
 if __name__ == '__main__':
